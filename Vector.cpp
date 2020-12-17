@@ -32,20 +32,20 @@ public:
 		cout << "z2 := ";
 		cin >> b[2];
 	}
-	double res()
+	double coord()
 	{
-		result[0] = (a[1] * b[2]) - (a[2] * b[1]);
-		result[1] = (a[2] * b[0]) - (a[0] * b[2]);
-		result[2] = (a[0] * b[1]) - (a[1] * b[0]);
+		coords[0] = (a[1] * b[2]) - (a[2] * b[1]);
+		coords[1] = (a[2] * b[0]) - (a[0] * b[2]);
+		coords[2] = (a[0] * b[1]) - (a[1] * b[0]);
 		return 0;
 
 	}
-	double vivod()
+	double out()
 	{
 		cout << "Векторное произведение векторов a и b : = " << endl;
-		cout << "x: " << result[0] << endl;
-		cout << "y: " << result[1] << endl;
-		cout << "z: " << result[2] << endl;
+		cout << "x: " << coords[0] << endl;
+		cout << "y: " << coords[1] << endl;
+		cout << "z: " << coords[2] << endl;
 		return 0;
 
 	}
@@ -59,8 +59,8 @@ int main()
 	metod vector;
 	vector.first();
 	vector.second();
-	vector.res();
-	vector.vivod();
+	vector.coord();
+	vector.out();
 	return 0;
 	system("pause");
 }
