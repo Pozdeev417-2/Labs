@@ -3,146 +3,198 @@
 #include<bitset>
 #include<iostream>
 
-
-class GodOfWar {
-private:// доступ из основной функии не доступен
-    std::string name = " Кратос ";
-    double weight = 105;
-    double growht = 186;
-    std::string age = "не известен, точно больше 100 лет.";
-    std::string son = "Атрей, известного в скандинавской мифологии больше как бог лжи Локи.\n\n\n";
-public: // доступ в подобном роде имеют все
-    GodOfWar() { std::cout << "\t\t\tВызвался конструктор\n " << this << std::endl; }// пустой конструктор потому что по заданию пустой ;(
-    GodOfWar(GodOfWar const& another_GodOfWAr) {} // копирующий конструктор, так как основной конструктор пустой-то и этот пустой
-
-    void History(std::string qua) {
-        std::cout << "\t\t\t\tВызван метод History\n" << std::endl;
-        std::cout << "\t\t\tНебольшой экскурс в историю серии игра GOD OF WAR.\n\n\nГлавный протагонист серии игр God of War. Кратос впервые появился в видеоигре God of War, выпущенной в 2005 году. В этой игре Кратос начинает свой путь к мести, который он продолжит в последующих играх серии. God of War стала одной из самых важных игр для игровых систем PlayStation.\n\n\n" << std::endl;
-        std::cout << "\t\t\t\t ВВедите (Да) если готовы продолжать\n" << std::endl;
-        std::cin >> qua;
-        if (qua == "Да") {
-        }
+/*
+Динамическая память(C++)
+Определения и синтаксис
+Класс - шаблонное описание, по которому создаются объекты.В некотором роде аналогичен типу данных - является всего лишь описанием, по которому могут быть созданы многочисленные экземпляры.
+class car // игровое транспортное средство
+{
+    double max_speed = 120; // свойство, скорость, проинициализирована
+    double fuel_consumption; // свойство, потребление топлива
+    double current_speed; // свойство, скорость
+    char regnumber[6] = { 0 }; // свойство, госномер
+    unsigned char capacity; // свойство, число пасажиров
+    accelerate(double v); // метод, увеличить скорость
+    get_coordinate(/*... *//*); // метод, получить текущее положение
+    /*
+    change_color(/*...*//*); // метод, сменить текстуру
+}
+/*
+Объект - экземпляр класса.В каком - то роде аналогичен переменной : можно создать переменную M типа N, и объект K класса L.
+// где-то в коде:
+car car_object1; // объект в стековой памяти (локальный)
+car* car_object2; // указатель на объект в динамической памяти
+car_object2 = new car; // создание самого объекта в динамической памяти
+Методы - функции в составе класса(объявленные внутри класса).
+Свойства - переменные в составе класса(объявленные внутри класса).
+Чтобы воспользоваться свойствами и методами конструктора, используются операторы доступа “.” если объект локальный и “->” если объект представлен указателем :
+// где-то в коде:
+car_object1.max_speed = 150; // для локального объекта
+car_object1.accelerate(150); // для локального объекта
+car_object2->max_speed = 150; // для объекта, представленного указателем
+car_object2->accelerate(150); // для объекта, представленного указателем
+Чтобы изнутри конструктора сослаться на объект, который его представляет, используется указатель this.
+Конструктор - метод класса, автоматически подставляемый компилятором в код без участия программиста в момент создания объекта класса.Конструктор необходим в случае
+если при создании объекта нужно выполнять действия по инициализации, установлению сетевого соединения, открытию файлов, выделению динамической памяти и т.д.
+если при создании объекта нужно скопировать его свойства на основе другого объекта.
+Конструктор всегда по правилам C++ имеет то же имя, что и класс, и не возвращает параметров :
+class car // игровое транспортное средство
+{
+    car() {} // конструктор по умолчанию
+    car(car another_car) // копирующий конструктор
+    {
+        this->max_speed = another_car.max_speed;
+        this->fuel_consumption = another_car.fuel_consumption;
+        this->current_speed = another_car.current_speed;
+        this->capacity = another_car.capacity;
     }
-    void excess_weight(std::string qua) {
-        std::cout << "\t\t\t\tВызван метод excess_weight\n" << std::endl;
-        std::cout << "\t\t\tПосчитаем ожирение Кратоса!\nЕго процент ожирения равен = " << (weight / growht) << "% что равно 4-ой стадии ( на самом деле у него кость широкая и она раскаченный малый" << std::endl;
-        std::cout << "\t\t\t\t ВВедите (Да) если готовы продолжать\n" << std::endl;
-        std::cin >> qua;
-        if (qua == "Да") {
-        }
+}
+Если при уничтожении объекта нужно освобождать некоторые общие ресурсы и выполнять другие обязательные действия, объявляется метод - деструктор.Деструктор подставляется компилятором автоматически в код, когда прекращается срок жизни объекта(в конце функции, где был объявлен объект, либо в конце работы приложения).Деструктор не получает и возвращает параметров.Имя деструктора всегда равно имени класса с тильдой в начале :
+class car // игровое транспортное средство
+{
+    ~car() // деструктор
+    {
+        save_to_file();
+        close_file();
+        delete[] block_of_memory;
+        connection.close();
     }
-    void shorty_information(std::string qua) {
-        std::cout << "\t\t\t\tВызван метод shorty_information\n" << std::endl;
-        std::cout << "\t\t\tКраткая справка о главном героии серии God of War.\n\n\nИмя главног героя God of war = " << name << "\nЕго рост = " << growht << " сантиметров \nЕго вес = " << weight << " килогарамм \n Его рост " << age << " \nЕщё у этого чудика есть сын = " << son << std::endl;
-        std::cout << "\t\t\t\t ВВедите (Да) если готовы продолжать\n" << std::endl;
-        std::cin >> qua;
-        if (qua == "Да") {
+}
+Методы + свойства = поля класса.
+Инкапсуляция, наследование и полиморфизм - три основные идеи(парадигмы) ООП.
+Инкапсуляция - фактически, объединение данных и методов, объединённых общим смыслом, в одну конструкцию(класс), а также защита данных и механизмов конструкции от стороннего вмешательства.
+Наследование - создание дочернего класса от некоего родительского и заимствование в дочернем свойств и методов родительского.Позволяет быстро обновлять / изменять кодовую базу : изменения в родительском классе автоматически применяются ко всем дочерним.Один класс можно наследовать от нескольких родительских.
+Полиморфизм - простыми словами : экземпляры одного класса ведут себя по - разному.
+Для ограничения доступа в стороннем коде к полям класса применяются спецификаторы доступа public, protected и private (если не применять ни один из спецификаторов, по умолчанию работает private) :
+    class car // игровое транспортное средство
+{
+private: // всё, что ниже до следующего спецификатора, будет private
+    double max_speed = 120; // свойство, недоступное извне
+    double fuel_consumption; // свойство, недоступное извне
+    double current_speed; // свойство, недоступное извне
+    char regnumber[6] = { 0 }; // свойство, недоступное извне
+    unsigned char capacity; // свойство, недоступное извне
+    get_coordinate(/*... *//*); // метод, недоступный извне
+/*
+public:
+    car(/*???*//*); // должен быть в public
+    /*
+    change_color(/*...*//*); // метод, доступный извне
+    /*
+    accelerate(double v); // метод, доступный извне
+}
+/*
+После таких изменений в классе изменится поведение объекта :
+// где-то в коде
+car_object1.max_speed = 150; // !!!ВЫЗОВЕТ ОШИБКУ КОМПИЛЯЦИИ
+car_object1.change_color(“cherry”);
+Пример кода модуля с классом :
+#include<iostream>
+#include<string>
+class car // игровое транспортное средство
+{
+private: // всё, что ниже до следующего спецификатора, будет private
+    double max_speed = 120; // свойство, недоступное извне
+    double fuel_consumption; // свойство, недоступное извне
+    double current_speed; // свойство, недоступное извне
+    char regnumber[6] = { 0 }; // свойство, недоступное извне
+    unsigned char capacity; // свойство, недоступное извне
+    double get_coordinate() { return 0.0; } // метод, недоступный извне
+    std::string color = “green”;
+public:
+    car() {}
+    void change_color(std::string pColor); // метод, определённый СНАРУЖИ
+    bool accelerate(double v) // метод, определённый ВНУТРИ класса
+    {
+        if (v <= this->max_speed)
+        {
+            this->current_speed = v;
+            return true;
         }
+        else
+            return false;
     }
-    void IMPORTANT_CALL_HER(std::string game, std::string kill, std::string qua) {
-        std::cout << "\t\t\t\tВызван метод IMPORTANT_CALL_HER\n" << std::endl;
-        std::cout << "\t\t\tНебольшой тестик,пройди!\n\n\nКак вы относитесь к играм? (пишите с заглавной буквы)" << std::endl;
-        std::cin >> game;
-        if ((game == "Нравится") || (game == "Игроман") || (game == "Играю переодически") || (game == "Геймер") || (game == "Жизни без них не представляю") || (game == "Люблю")) {
-            std::cout << " Тебе понравится эта серия игр, пройти, сюжет охонь, или, посмотри прохождения." << std::endl;
-        }
-        else {
-            std::cout << "Ну, попробуй поиграть, может быть всё-таки понравятся игры." << std::endl;
-        }
-        std::cout << "Как вы относитесь к убийствам в играх? (пишите с заглавной буквы (нормально/не приемлимо))" << std::endl;
-        std::cin >> kill;
-        if (kill == "Нормально") {
-            std::cout << "Тогда тебе точно надо познакомиться с этой серией" << std::endl;
-        }
-        else {
-            std::cout << "Ладно, тогда не играй, но всё же полазь по другим методам этого класса позязя :(." << std::endl;
-        }
-        std::cout << "\t\t\t\t ВВедите (Да) если готовы продолжать\n" << std::endl;
-        std::cin >> qua;
-        if (qua == "Да") {
-        }
-    }
-    void Big_survey(std::string name, std::string old, std::string name2, std::string Sony, int& ball, std::string qua) {
-        std::cout << "\t\t\t\tВызван метод Big_survey\n" << std::endl;
-        std::cout << "\t\t\tБольшой тестик, попытайся пройти,ахахаххах!\n\n\nТебе предстоит пройти небольшой опросик по поводу того, что я рассказывал в методах История и краткой информации" << std::endl;
-        std::cout << "Как зовут Героя?(БУКВУ СОБЛЮДАЙ БОЛЬШУЮ букву)" << std::endl;
-        std::cin >> name;
-        if (name == "Кратос") {
-            std::cout << "Красатуля.Сколько ему лет?? (-/100)" << std::endl;
-        }
-        else {
-            std::cout << "А вот всё, а вот надо было читать внимательнее.Сколько ему лет?? (-/100)" << std::endl;
-        }
-        std::cin >> old;
-        if (old == "-") {
-            std::cout << "Даю тебе воображаемую пятюню.Кто его сын (по мифологии)?" << std::endl;
-        }
-        else {
-            std::cout << "Минус ещё балл.Кто его сын (по мифологии)?" << std::endl;
-        }
-        std::cin >> name2;
-        if (name2 == "Локи") {
-            std::cout << "Да вообще просто лучший.На какой платформе эта игра базируется (Соня/Бокс/ПК-боярь)?" << std::endl;
-        }
-        else {
-            std::cout << "Неповезло... (На какой платформе эта игра базируется (Соня/Бокс/ПК-боярь)?" << std::endl;
-        }
-        std::cin >> Sony;
-        if (Sony == "Соня") {
-            std::cout << "Лучший, просто 10/10.Ты очень классно читаешь и запоминаешь, у меня на этом всё." << std::endl;
-        }
-        else {
-            std::cout << "Опять неудача." << std::endl;
-        }
-        std::cout << "Введи количество правильных ответов " << std::endl;
-        std::cin >> ball;
-        switch (ball) {
-        case  1:
-            std::cout << "Честно говоря - не очень    " << std::endl;
-            break;
-        case 2:
-            std::cout << "Не дотягиваешь до хорошего читателя" << std::endl;
-            break;
-        case 3:
-            std::cout << "Хороший читатель" << std::endl;
-            break;
-        case 4:
-            std::cout << "Лучший в деле чтения и запоминания данных" << std::endl;
-            break;
-        default:std::cout << "Error 404 ты что-то не то ввёл" << std::endl;
-            break;
-        }
-        std::cout << "\t\t\t\t ВВедите (Да) если готовы продолжать\n" << std::endl;
-        std::cin >> qua;
-        if (qua == "Да") {
-        }
-    }
-    ~GodOfWar() { std::cout << "\t\t\tВызвался деструктор\n" << this << std::endl; }
-
 };
-void foo_class() {
-    std::cout << "\t\t\t\t\t\t\tВызвана функция foo_class\n" << std::endl;
-    std::string qua;
-    std::string game;
-    std::string kill;
+void car::change_color(std::string pColor) // метод, определённый СНАРУЖИ
+{
+    this->color = pColor;
+}
+int main(void)
+{
+    // настройка локализации и кодировки
+    car car_object1; // объект в стековой памяти (локальный)
+    car* car_object2; // указатель на объект в динамической памяти
+    car_object2 = new car; // создание самого объекта в динамической памяти
+    car_object1.max_speed = 150; // !!!ВЫЗОВЕТ ОШИБКУ КОМПИЛЯЦИИ
+    car_object1.change_color(“cherry”);
+    // обращаться к остальным свойствам и вызывать прочие методы
+    std::system(“pause”);
+}
+Применение
+Пример 1. При электронной обработке документа(скажем, PDF или Word) удобно объединить в класс все функции по действиям с документом, а также все связанные с ним переменные.
+class Document {
+    Document(); // пустой конструктор
+    Document(string filename); // конструктор, который при создании объекта также открывает файл
+    insert_text(/*...*//*); // вставить фрагмент в документ
+    /*
+    insert_image(/*...*//*); // вставить изображение в  документ
+    /*
+    save(); // сохранить фрагмент в файл
+    string contents; // строка, куда считывается  содержимое файла
+    time_t creation_time; // время создания файла
+}
+*/
+
+class offset {
+
+private:// доступ ограничен
+
+    std::string name = " Петя ";
+    std::string name2 = " Вова ";
+    double weight = 85;
+    double growht = 190;
+    std::string appraisals = "отличник.\n\n\n";
+    std::string family = "живет в неполной семье";
+
+public: // общий доступ
+
+    Offset() { std::cout << "\t\t\tНачнём нашу игровую мини-сессию\n " << this << std::endl; }// пустой конструктор
+    Offset(Offset const& headman) {} // копирующий конструктор
+
+    void about_Петя(std::string one) {
+        std::cout << "\t\t\t\tВызван метод about_Петя\n" << std::endl;
+        std::cout << "\t\t\tИ так, Петя - самый лучший ученик в классе, поэтому выполнит свою работу быстрее и качественнее других" << std::endl;
+        std::cout << "\t\t\t\tДля продолжения введите --)  Петя\n" << std::endl;
+        std::cin >> one;
+        if (one == "Петя") {
+        }
+    }
+    
+    void student_offset(std::string student, std::string one) {
+        std::cout << "\t\t\t\tВызван метод offset_students\n" << std::endl;
+        std::cout << "Offset - очень важная страница в жизни студентов. Правильное выполнение сулит легкое прохлждение остальных этапов, которые ждут студентов в дальнейшем." << std::endl;
+        std::cout << "\t\t\t\tДля продолжения введите --)  Петя\n" << std::endl;
+        std::cin >> one;
+        if (one == "Петя") {
+        }
+    }
+ ~Offset() { std::cout << "\t\t\tНадеюсь, ты усвоил много полезной информации.\n" << this << std::endl; } // Вызов деструктора
+};
+
+void two() {
+    std::cout << "\t\t\t\t\t\t\tВызвана функция two\n" << std::endl;
+    std::string one;
+    std::string student;
     std::string name;
-    std::string old;
     std::string name2;
-    std::string Sony;
-    int ball;
-    GodOfWar game1;
-    game1.History(qua);
-    game1.shorty_information(qua);
-    game1.excess_weight(qua);
-    game1.IMPORTANT_CALL_HER(game, kill, qua);
-    game1.Big_survey(name, old, name2, Sony, ball, qua);
-    GodOfWar* game2;
-    game2 = new GodOfWar;
-    game2->History(qua);
-    game2->shorty_information(qua);
-    game2->excess_weight(qua);
-    game2->IMPORTANT_CALL_HER(game, kill, qua);
-    game2->Big_survey(name, old, name2, Sony, ball, qua);
+    int score;
+    Offset student1;
+	student1.about_Петя(one);
+	student1.student_offset2(student, one);
+    Offset* student2;
+	student2 = new Dota2;
+	student2->about_Петя(one);
+	student2->student_offset2(student, one);
 
 }
 
@@ -151,29 +203,20 @@ int main()
 {
 
     setlocale(LC_ALL, "Russian");
-    std::cout << "\t\t\t\t\t\t\tЛабороторная 6.Классы\n" << std::endl;
-    std::string qua;
-    std::string game;
-    std::string kill;
+    std::cout << "\t\t\t\t\t\t\tПодытог Lab6\n" << std::endl;
+    std::string one;
+    std::string student;
     std::string name;
-    std::string old;
     std::string name2;
-    std::string Sony;
-    int ball;
-    GodOfWar game1;
-    game1.History(qua);
-    game1.shorty_information(qua);
-    game1.excess_weight(qua);
-    game1.IMPORTANT_CALL_HER(game, kill, qua);
-    game1.Big_survey(name, old, name2, Sony, ball, qua);
-    GodOfWar* game2;
-    game2 = new GodOfWar;
-    game2->History(qua);
-    game2->shorty_information(qua);
-    game2->excess_weight(qua);
-    game2->IMPORTANT_CALL_HER(game, kill, qua);
-    game2->Big_survey(name, old, name2, Sony, ball, qua);
-    foo_class();
+    int end;
+	Offset student1;
+	student1.about_Петя(one);
+	student1.student_offset2(student,one);
+	Offset* student2;
+	student2 = new Offset2;
+	student2->about_Петя(one);
+	student2->student_offset2(student,one);
+    two();
     system("pause");
     return 0;
 }
