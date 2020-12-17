@@ -7,47 +7,36 @@ using namespace std;
 class metod
 {
 public:
-	double a[3];
-	double b[3];
-	double result[3];
+	double a[3]; // Первый массив
+	double b[3]; // Второй массив
+	double result[3]; // Третий массив (результат)
+	
 	string name;
-	void first()
+	void first() // Ввод элементов первого массива
 	{
-		cout << "Введите 3 координаты вектора a := " << endl;
-		cout << "x1 := ";
-		cin >> a[0];
-		cout << "y1 := ";
-		cin >> a[1];
-		cout << "z1 := ";
-		cin >> a[2];
-
+		cout << "Введите 3 координаты вектора a : = ";
+		for (i=0; i<3; i++) cin >> a[i];
 	}
-	void second()
+	
+	void second() // Ввод элементов второго массива
 	{
-		cout << "Введите 3 координаты вектора b : = " << endl;
-		cout << "x2 := ";
-		cin >> b[0];
-		cout << "y2 := ";
-		cin >> b[1];
-		cout << "z2 := ";
-		cin >> b[2];
+		cout << "Введите 3 координаты вектора b : = ";
+		for (i=0; i<3; i++) cin >> b[i];
 	}
-	double coord()
+	
+	double coord() // Вычисление результата
 	{
-		coords[0] = (a[1] * b[2]) - (a[2] * b[1]);
-		coords[1] = (a[2] * b[0]) - (a[0] * b[2]);
-		coords[2] = (a[0] * b[1]) - (a[1] * b[0]);
+		for (i=0; i<3; i++)
+		 c[i]=a[(i+1)%3]*b[(i+2)%3]-a[(i+2)%3]*b[(i+1)%3];
+	}
+	
+	double out() // Отображение результата
+	{
+		cout << "Векторное произведение векторов a и b : = ";
+		for (i=0; i<3; i++)
+		 cout << " " << c[i];
+		cout << endl;
 		return 0;
-
-	}
-	double out()
-	{
-		cout << "Векторное произведение векторов a и b : = " << endl;
-		cout << "x: " << coords[0] << endl;
-		cout << "y: " << coords[1] << endl;
-		cout << "z: " << coords[2] << endl;
-		return 0;
-
 	}
 
 
